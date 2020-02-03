@@ -36,7 +36,7 @@ class TestMailNotifyDaemon(object):
         headers = response[0]["Content"]["Headers"]
         assert headers["From"][0] == "Global manager via Tracim <test_user_from+1@localhost>"
         assert headers["To"][0] == "bob <bob@bob>"
-        assert headers["Subject"][0] == "[Tracim] Created account"
+        assert headers["Subject"][0] == "[Tracim] Someone created an account for you"
 
     @pytest.mark.mail
     def test_func__create_new_content_with_notification__ok__nominal_case(
