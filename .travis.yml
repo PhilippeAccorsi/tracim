@@ -267,7 +267,7 @@ jobs:
         - cd $TRAVIS_BUILD_DIR/backend
         - nohup pserve $BACKEND_TEST_CONFIG_FILE > $PSERVE_LOG 2>&1 &
         - cd $TRAVIS_BUILD_DIR/functionnal_tests
-        - nohup tracimcli caldav start&
+        - nohup tracimcli caldav start -c $BACKEND_TEST_CONFIG_FILE&
         - yarn run travis-cypress-run
         - cd $TRAVIS_BUILD_DIR
       if: commit_message !~ /(\[skip ci cypress\])/
