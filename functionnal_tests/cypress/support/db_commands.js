@@ -147,7 +147,7 @@ Cypress.Commands.add('setupBaseDB', () => {
 })
 
 Cypress.Commands.add('resetDB', () => {
-  cy.exec('./npm-scripts/reset-db')
+  cy.exec('./npm-scripts/init-dev-data')
   cy.cleanSessionCookies()
 })
 

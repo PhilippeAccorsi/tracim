@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+
+trap "exit" INT TERM
+trap "kill 0" EXIT
+
+USE_VENV=0
+if [ "$1" =  "venv" ]
+then
+  USE_VENV=1
+fi
+
+cd ../backend/
+
+if [ $USE_VENV ]
+then
+  . env/bin/activate
+fi
+
+tracimcli caldav start -c cypress_test.ini 2> /tmp/caldav_log.ini &
+caldav_pid=$!
+tracimcli caldav sync -c cypress_test.ini &
+pserve cypress_test.ini > /tmp/pserve_log.ini &
+tracim_pid=$!
+
+
+if [ $USE_VENV ]
+then
+  deactivate
+fi
+
+cd -
+
+if [ "$3" ]
+then
+  $3
+fi
+
+if [ "$2" =  "continue" ]
+then
+  wait
+else
+  kill $tracim_pid
+  kill $caldav_pid
+fi

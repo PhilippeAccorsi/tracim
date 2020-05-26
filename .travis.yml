@@ -6,7 +6,6 @@ env:
     - DEFAULT_POSTGRES_SQLALCHEMY__URL=postgresql://user:secret@127.0.0.1:5432/tracim_test?client_encoding=utf8
     - DB=sqlite
     - COVERAGE=0
-    - PSERVE_LOG=/tmp/pserve_log.log
     - TRACIM_SQLALCHEMY__URL=$DEFAULT_SQLITE_SQLALCHEMY__URL
     - TRACIM_DEPOT_STORAGE_NAME=test
     - TRACIM_DEPOT_STORAGE_DIR=/tmp/test/depot
@@ -266,11 +265,8 @@ jobs:
         - BACKEND_TEST_CONFIG_FILE=cypress_test.ini
         - TRAVIS_NODE_VERSION="10"
       script:
-        - cd $TRAVIS_BUILD_DIR/backend
-        - nohup pserve $BACKEND_TEST_CONFIG_FILE > $PSERVE_LOG 2>&1 &
         - cd $TRAVIS_BUILD_DIR/functionnal_tests
-        - nohup tracimcli caldav start&
-        - yarn run travis-cypress-run
+        - yarn run cypress-ci-run
         - cd $TRAVIS_BUILD_DIR
       if: commit_message !~ /(\[skip ci cypress\])/
 

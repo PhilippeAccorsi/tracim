@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+USE_VENV=0
+if [ "$1" =  "venv" ]
+then
+  USE_VENV=1
+fi
+
+cd ../backend/
+
+if [ $USE_VENV ]
+then
+  . env/bin/activate
+fi
+
+rm -rf /tmp/cypress_test && \
+./create_test_storage_dir.sh /tmp/cypress_test && \
+tracimcli db init -c ./cypress_test.ini
+
+if [ $USE_VENV ]
+then
+  deactivate
+fi
+
+cd -

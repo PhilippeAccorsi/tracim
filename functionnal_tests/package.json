@@ -5,12 +5,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "precypress-run": "yarn run reset-db",
-    "cypress-run": "yarn precypress-run && cypress run",
-    "precypress-open": "yarn run reset-db",
-    "cypress-open": "yarn precypress-open && npm-scripts/cypress-open",
-    "reset-db": "npm-scripts/reset-db",
-    "travis-cypress-run": "npm-scripts/travis-cypress-run"
+    "cypress-run": "npm-scripts/init-dev-data venv && npm-scripts/run-tracim-dev venv continue \"cypress run\"",
+    "cypress-open": "npm-scripts/init-dev-data venv && npm-scripts/run-tracim-dev venv continue \"cypress open\"",
+    "cypress-ci-run": "npm-scripts/init-dev-data ci && npm-scripts/run-tracim-dev ci stop \"cypress run\""
   },
   "keywords": [],
   "author": "",
