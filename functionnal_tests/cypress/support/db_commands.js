@@ -147,9 +147,7 @@ Cypress.Commands.add('setupBaseDB', () => {
 })
 
 Cypress.Commands.add('resetDB', () => {
-  cy.exec('rm -rf ./sessions_data')
-  cy.exec('rm -rf ./sessions_lock')
-  cy.exec('cp /tmp/tracim_cypress.sqlite.tmp /tmp/tracim_cypress.sqlite')
+  cy.exec('./npm-scripts/reset-db')
   cy.cleanSessionCookies()
 })
 
@@ -287,4 +285,3 @@ Cypress.Commands.add('createGuestUploadLink', (workspaceId, emailList, password 
   }
   return cy.request('POST', url, data)
 })
-

@@ -1,9 +1,9 @@
 #/usr/bin/env sh
 
 cd ../backend/ && \
-tracimcli db delete --force -c ./cypress_test.ini && \
+. env/bin/activate && \
+rm -rf /tmp/cypress_test && \
+./create_test_storage_dir.sh /tmp/cypress_test && \
 tracimcli db init -c ./cypress_test.ini && \
-ls -la && \
-cp /tmp/tracim_cypress.sqlite /tmp/tracim_cypress.sqlite.tmp && \
 cd - && \
 cypress run
