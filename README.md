@@ -175,20 +175,20 @@ You can now head to (if pushpin is correctly configured and use default port 799
 
 ### Upkeep
 
-If you use default "file" storage for session, new session file will be created but not removed, which mean lot of unneeded file.
-To mitigate this, you could remove file older than 10 day with :
+If you use the default "file" storage for sessions, new session files will be created but not removed, which leads to a lot of unneeded files.
+To mitigate this, you may remove files older than 10 days with:
 
     find . -type f -mtime +10 -print -exec rm {} \;
 
-You should use this command in both session data and session lock dirs.
+You should use this command in both the session data and the session lock directories.
 
-Another way to solve this issue is to set session to use another backend(we do support all beaker backend).
-We suggest to use redis backend, which will not created file to disk:
+Another way to solve this issue is to use another storage backend (we do support any of the Beaker backend).
+We suggest to use the redis backend, which will not create any file on the disk:
 
     session.type = ext:redis
     session.url = redis://localhost:6379/0
 
-read [beaker documentation](https://beaker.readthedocs.io/en/latest/configuration.html) for more information about sessions.
+See the [Beaker documentation](https://beaker.readthedocs.io/en/latest/configuration.html) for more information about sessions.
 
 #### More documentation about running Tracim and Tracim services
 
